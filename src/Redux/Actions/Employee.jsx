@@ -1,15 +1,16 @@
 import { ActionList } from 'Redux/Constants/ActionList';
+import {AddEmployeeHelper, DeleteEmployeeHelper} from "Redux/Providers";
 
-export const addEmployee = (data) => {
+export const addEmployee = (payload) => {
     return {
         type: ActionList.AddEmployee,
-        data: data
+        data: AddEmployeeHelper(payload)
     }
 };
 
 export const deleteEmployee = (data) => {
     return {
         type: ActionList.DeleteEmployee,
-        data: data
+        data: DeleteEmployeeHelper(data)
     }
 }

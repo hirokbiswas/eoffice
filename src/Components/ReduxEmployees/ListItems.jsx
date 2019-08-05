@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 
 import {deleteEmployee} from "Redux/Actions/Employee";
-import {DeleteEmployeeHelper} from "Redux/Providers"
 
 class ListItems extends React.Component {
 
@@ -13,10 +12,10 @@ class ListItems extends React.Component {
     }
 
     deleteEmployee = (event) => {
-        DeleteEmployeeHelper(
-            parseInt(event.target.value),
-            this.props.employees
-        );
+        this.props.deleteEmployee({
+            id: parseInt(event.target.value),
+            employees: this.props.employees
+        });
     }
 
     render() {
@@ -65,8 +64,8 @@ const mapStateToProps = state => {
     };
 }
 
-function matchDispatchToProps(dispatch) {
-    return bindActionCreators({deleteEmployee: deleteEmployee}, dispatch);
-}
+const matchDispatchToProps = dispatch => bindActionCreators(
+    {deleteEmployee}, dispatch
+);
 
 export default connect(mapStateToProps, matchDispatchToProps)(ListItems);
